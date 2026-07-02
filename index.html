@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List with Calendar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📅 To-Do Calendar</h1>
+            <p>Track your tasks and events</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Calendar Section -->
+            <section class="calendar-section">
+                <div class="calendar-header">
+                    <button id="prevMonth" class="month-btn">←</button>
+                    <h2 id="currentMonth"></h2>
+                    <button id="nextMonth" class="month-btn">→</button>
+                </div>
+                <div class="calendar">
+                    <div class="weekdays">
+                        <div class="weekday">Sun</div>
+                        <div class="weekday">Mon</div>
+                        <div class="weekday">Tue</div>
+                        <div class="weekday">Wed</div>
+                        <div class="weekday">Thu</div>
+                        <div class="weekday">Fri</div>
+                        <div class="weekday">Sat</div>
+                    </div>
+                    <div class="dates" id="calendarDates"></div>
+                </div>
+            </section>
+
+            <!-- To-Do & Events Section -->
+            <section class="todo-section">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="todos">📝 To-Do List</button>
+                    <button class="tab-btn" data-tab="events">🎯 Events</button>
+                </div>
+
+                <!-- To-Do Tab -->
+                <div id="todos" class="tab-content active">
+                    <div class="input-group">
+                        <input type="text" id="todoInput" placeholder="Add a new task..." />
+                        <button id="addTodoBtn" class="btn-add">Add</button>
+                    </div>
+                    <ul id="todoList" class="todo-list"></ul>
+                </div>
+
+                <!-- Events Tab -->
+                <div id="events" class="tab-content">
+                    <div class="input-group">
+                        <input type="text" id="eventTitle" placeholder="Event title..." />
+                        <input type="date" id="eventDate" />
+                        <input type="time" id="eventTime" />
+                        <button id="addEventBtn" class="btn-add">Add Event</button>
+                    </div>
+                    <ul id="eventList" class="event-list"></ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- Selected Date Info -->
+        <div id="dateInfo" class="date-info">
+            <h3>Selected Date: <span id="selectedDate">None</span></h3>
+            <ul id="dateEventsList" class="date-events"></ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
