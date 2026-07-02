@@ -1,10 +1,10 @@
-// Data Management
+// Data Management part if you're tryinf to understand the code.
 let todos = JSON.parse(localStorage.getItem('todos')) || [];
 let events = JSON.parse(localStorage.getItem('events')) || [];
 let currentDate = new Date();
 let selectedDate = null;
 
-// Initialize
+
 document.addEventListener('DOMContentLoaded', () => {
     renderCalendar();
     renderTodos();
@@ -12,9 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
     attachEventListeners();
 });
 
-// Event Listeners
+
 function attachEventListeners() {
-    // Month Navigation
+    
     document.getElementById('prevMonth').addEventListener('click', () => {
         currentDate.setMonth(currentDate.getMonth() - 1);
         renderCalendar();
@@ -25,7 +25,7 @@ function attachEventListeners() {
         renderCalendar();
     });
 
-    // Tab Switching
+   
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const tabName = e.target.dataset.tab;
@@ -33,20 +33,20 @@ function attachEventListeners() {
         });
     });
 
-    // To-Do Input
+    
     document.getElementById('todoInput').addEventListener('keypress', (e) => {
         if (e.key === 'Enter') addTodo();
     });
     document.getElementById('addTodoBtn').addEventListener('click', addTodo);
 
-    // Event Input
+    
     document.getElementById('eventTitle').addEventListener('keypress', (e) => {
         if (e.key === 'Enter') addEvent();
     });
     document.getElementById('addEventBtn').addEventListener('click', addEvent);
 }
 
-// Tab Switching
+
 function switchTab(tabName) {
     document.querySelectorAll('.tab-content').forEach(tab => {
         tab.classList.remove('active');
@@ -59,7 +59,7 @@ function switchTab(tabName) {
     document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
 }
 
-// Todo Functions
+
 function addTodo() {
     const input = document.getElementById('todoInput');
     const text = input.value.trim();
@@ -126,7 +126,7 @@ function renderTodos() {
     });
 }
 
-// Event Functions
+
 function addEvent() {
     const title = document.getElementById('eventTitle').value.trim();
     const date = document.getElementById('eventDate').value;
@@ -200,18 +200,18 @@ function renderEvents() {
     });
 }
 
-// Calendar Functions
+
 function renderCalendar() {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
 
-    // Update header
+    
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'
     ];
     document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
 
-    // Get first day of month and number of days
+  
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const daysInPrevMonth = new Date(year, month, 0).getDate();
@@ -219,7 +219,7 @@ function renderCalendar() {
     const calendarDates = document.getElementById('calendarDates');
     calendarDates.innerHTML = '';
 
-    // Previous month dates
+    
     for (let i = firstDay - 1; i >= 0; i--) {
         const date = document.createElement('div');
         date.className = 'date other-month';
@@ -227,7 +227,7 @@ function renderCalendar() {
         calendarDates.appendChild(date);
     }
 
-    // Current month dates
+    
     const today = new Date();
     for (let day = 1; day <= daysInMonth; day++) {
         const date = document.createElement('div');
@@ -237,22 +237,22 @@ function renderCalendar() {
         const currentDateObj = new Date(year, month, day);
         const dateStr = currentDateObj.toISOString().split('T')[0];
 
-        // Check if today
+        
         if (currentDateObj.toDateString() === today.toDateString()) {
             date.classList.add('today');
         }
 
-        // Check if has events
+        
         if (events.some(event => event.date === dateStr)) {
             date.classList.add('has-event');
         }
 
-        // Check if selected
+       
         if (selectedDate === dateStr) {
             date.classList.add('selected');
         }
 
-        // Add click event
+        
         date.addEventListener('click', () => {
             document.querySelectorAll('.date').forEach(d => d.classList.remove('selected'));
             date.classList.add('selected');
@@ -263,7 +263,7 @@ function renderCalendar() {
         calendarDates.appendChild(date);
     }
 
-    // Next month dates
+    
     const remainingDays = 42 - (firstDay + daysInMonth);
     for (let day = 1; day <= remainingDays; day++) {
         const date = document.createElement('div');
@@ -310,7 +310,7 @@ function renderDateInfo() {
     });
 }
 
-// Utility
+
 function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
